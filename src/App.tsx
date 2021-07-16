@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { Button } from './components/Button';
-
 
 import { SideBar } from './components/SideBar';
 import { Content } from './components/Content';
@@ -13,18 +11,17 @@ import './styles/global.scss';
 import './styles/sidebar.scss';
 import './styles/content.scss';
 
-interface GenreResponseProps {
-  id: number;
-  name: 'action' | 'comedy' | 'documentary' | 'drama' | 'horror' | 'family';
-  title: string;
-}
+import { GenreResponseProps } from './interfaces'
 
 export function App() {
   const [selectedGenreId, setSelectedGenreId] = useState(1);
 
-  const [genres, setGenres] = useState<GenreResponseProps[]>([]);
-
   const [selectedGenre, setSelectedGenre] = useState<GenreResponseProps>({} as GenreResponseProps);
+
+  
+  function handleClickButton(id: number) {
+    setSelectedGenreId(id);
+  }
 
   useEffect(() => {
     api.get<GenreResponseProps>(`genres/${selectedGenreId}`).then(response => {
@@ -34,7 +31,7 @@ export function App() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
-      <SideBar selectedGenre={ selectedGenre } />
+      <SideBar selectedGenre={ selectedGenre } handleClickButton={handleClickButton} />
       <Content selectedGenre={ selectedGenre } />
     </div>
   )

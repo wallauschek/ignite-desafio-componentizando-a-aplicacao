@@ -2,32 +2,10 @@ import { useEffect, useState } from 'react';
 import { MovieCard } from './MovieCard';
 
 import { api } from '../services/api';
-interface GenreResponseProps {
-  id: number;
-  name: 'action' | 'comedy' | 'documentary' | 'drama' | 'horror' | 'family';
-  title: string;
-}
-interface selectedGenreProps {
-  selectedGenre: {
-    id: number;
-    name: 'action' | 'comedy' | 'documentary' | 'drama' | 'horror' | 'family';
-    title: string;
-  }
-}
 
+import {ContentProps, MovieProps } from '../interfaces'
 
-interface MovieProps {
-  imdbID: string;
-  Title: string;
-  Poster: string;
-  Ratings: Array<{
-    Source: string;
-    Value: string;
-  }>;
-  Runtime: string;
-}
-
-export function Content(props: selectedGenreProps) {
+export function Content(props: ContentProps) {
   
   const selectedGenre = props.selectedGenre;
   
